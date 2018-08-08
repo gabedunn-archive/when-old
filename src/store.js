@@ -12,7 +12,9 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
     title: 'when.',
-    token: ''
+    token: '',
+    slugs: ['game-of-thrones'],
+    showData: {}
   },
   mutations: {
     changeToken (state, token) {

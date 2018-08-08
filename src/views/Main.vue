@@ -2,7 +2,7 @@
   <section id="main">
     <div class="wrapper">
       <PageHeader />
-      <!--<Shows/>-->
+      <Shows/>
     </div>
     <PageFooter />
   </section>
@@ -10,12 +10,14 @@
 
 <script>
   import PageHeader from '../components/sections/PageHeader'
+  import Shows from '../components/sections/Shows'
   import PageFooter from '../components/sections/PageFooter'
 
   export default {
     name: 'Main',
     components: {
       PageHeader,
+      Shows,
       PageFooter
     }
   }
