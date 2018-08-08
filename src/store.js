@@ -21,6 +21,10 @@ export default new Vuex.Store({
       state.token = token
     }
   },
-  actions: {}
+  actions: {
+    changeToken (context, token) {
+      context.commit('changeToken', token)
+    }
+  }
   // plugins: [vuexPersist.plugin]
 })
