@@ -1,11 +1,11 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import VuexPersist from 'vuex-persist'
+// import VuexPersist from 'vuex-persist'
 
-const vuexPersist = new VuexPersist({
-  key: 'when',
-  storage: localStorage
-})
+// const vuexPersist = new VuexPersist({
+//   key: 'when',
+//   storage: localStorage
+// })
 
 Vue.use(Vuex)
 
@@ -19,6 +19,6 @@ export default new Vuex.Store({
       state.token = token
     }
   },
-  actions: {},
-  plugins: [vuexPersist.plugin]
+  actions: {}
+  // plugins: [vuexPersist.plugin]
 })
