@@ -1,0 +1,329 @@
+// import fonts
+@import url('https://fonts.googleapis.com/css?family=Roboto:300,400|Source+Sans+Pro:300,400');
+
+// variables
+// screen sizes
+$mobile: 375px;
+$tablet: 768px;
+$laptop: 1024px;
+$desktop: 1440px;
+$massive: 2560px;
+
+// colours
+$text: rgb(74, 74, 74);
+$blue: rgb(50, 115, 220);
+$grey: rgb(54, 54, 54);
+
+// fonts
+$default-font-stack: 'Roboto', BlinkMacSystemFont, -apple-system, "Oxygen", "Ubuntu", "Fira Sans", "Helvetica", "Arial", sans-serif;
+
+html {
+  overflow-x: hidden;
+  overflow-y: auto;
+  padding: 0;
+  margin: 0;
+
+  body {
+    padding: 0;
+    margin: 0;
+    color: $text;
+    font-family: $default-font-stack;
+  }
+}
+
+a {
+  color: $blue;
+  cursor: pointer;
+  text-decoration: none;
+  transition: none 86ms ease-out;
+
+  &:hover {
+    color: $grey;
+  }
+}
+
+#app {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+}
+
+.wrapper {
+  flex: 1;
+}
+
+// Useful utilities
+
+// center text
+.has-text-centered {
+  text-align: center;
+}
+
+// inline divs
+.inline-div {
+  display: inline;
+}
+
+// Display things on different sizes
+//noinspection SassScssResolvedByNameOnly
+@media (max-width: $tablet) {
+  .hide-mobile {
+    display: none;
+  }
+}
+
+//noinspection SassScssResolvedByNameOnly
+@media (min-width: $tablet) {
+  .hide-desktop {
+    display: none;
+  }
+}
+
+// Dashed ul
+ul {
+  margin: 0;
+}
+
+ul.dashed {
+  list-style-type: none;
+}
+
+ul.dashed > li:before {
+  content: "-";
+  font-weight: bold;
+  margin-left: -17px;
+  padding-right: 12px;
+}
+
+// Auto padding, margin, and border radius
+$sizes: (0, 10, 15, 20, 25, 30, 50);
+$positions: ('top', 'left', 'bottom', 'right');
+
+@each $size in $sizes {
+  .m-#{$size} {
+    margin: $size + px;
+  }
+
+  @each $pos in $positions {
+    .m-#{$pos}-#{$size} {
+      margin-#{$pos}: $size + px;
+    }
+  }
+
+  .p-#{$size} {
+    padding: $size + px;
+  }
+
+  @each $pos in $positions {
+    .p-#{$pos}-#{$size} {
+      padding-#{$pos}: $size + px;
+    }
+  }
+
+  .b-#{$size} {
+    border-radius: $size + px;
+  }
+}
+
+// layout
+.wrapper {
+  padding: 0 0.5rem;
+
+  .show {
+    .details {
+      h2 {
+        font-size: 1.4rem;
+      }
+      h3 {
+        font-size: 1.1rem;
+      }
+    }
+  }
+}
+
+@media (min-width: $tablet) {
+  .wrapper {
+    padding: 0 1rem;
+
+    .show {
+      .details {
+        h2 {
+          font-size: 1.5rem;
+        }
+        h3 {
+          font-size: 1.2rem;
+        }
+      }
+    }
+  }
+}
+
+@media (min-width: $laptop) {
+  .wrapper {
+    padding: 0 3rem;
+
+    .show {
+      .details {
+        h2 {
+          font-size: 1.6rem;
+        }
+        h3 {
+          font-size: 1.2rem;
+        }
+      }
+    }
+  }
+}
+
+@media (min-width: $desktop) {
+  .wrapper {
+    padding: 0 3rem;
+
+    .show {
+      .details {
+        h2 {
+          font-size: 1.6rem;
+        }
+        h3 {
+          font-size: 1.2rem;
+        }
+      }
+    }
+  }
+}
+
+@media (min-width: $massive) {
+  .wrapper {
+    padding: 0 5rem;
+
+    .show {
+      .details {
+        h2 {
+          font-size: 1.6rem;
+        }
+        h3 {
+          font-size: 1.2rem;
+        }
+      }
+    }
+  }
+}
+
+// flex fallback styles
+// flex stuff
+.wrapper {
+  .shows {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-evenly;
+    align-content: flex-start;
+
+    .show {
+      flex: 1 0 50%;
+      margin: 0 1rem 1.5rem;
+    }
+    .message.span {
+      flex-basis: 90%;
+    }
+  }
+}
+
+@media (min-width: $tablet) {
+  .wrapper {
+    .shows {
+      .show {
+        flex: 1 0 40%;
+      }
+    }
+  }
+}
+
+@media (min-width: $laptop) {
+  .wrapper {
+    .shows {
+      .show {
+        flex: 1 0 22%;
+      }
+    }
+  }
+}
+
+@media (min-width: $desktop) {
+  .wrapper {
+    .shows {
+      .show {
+        flex: 1 0 22%;
+      }
+    }
+  }
+}
+
+@media (min-width: $massive) {
+  .wrapper {
+    .shows {
+      .show {
+        flex: 1 0 20%;
+      }
+    }
+  }
+}
+
+// grid layout
+@supports (grid-area: auto) {
+  // grid stuff
+  .wrapper {
+    .shows {
+      display: grid;
+      grid-template-columns: repeat(1, 1fr);
+      grid-column-gap: 0.5rem;
+    }
+  }
+
+  @media (min-width: $tablet) {
+    .wrapper {
+      .shows {
+        grid-template-columns: repeat(2, 1fr);
+
+        .message.span {
+          grid-column: span 2;
+        }
+      }
+    }
+  }
+
+  @media (min-width: $laptop) {
+    .wrapper {
+      .shows {
+        grid-template-columns: repeat(3, 1fr);
+
+        .message.span {
+          grid-column: span 3;
+        }
+      }
+    }
+  }
+
+  @media (min-width: $desktop) {
+    .wrapper {
+      .shows {
+        grid-template-columns: repeat(3, 1fr);
+
+        .message.span {
+          grid-column: span 3;
+        }
+      }
+    }
+  }
+
+  @media (min-width: $massive) {
+    .wrapper {
+      .shows {
+        grid-template-columns: repeat(4, 1fr);
+
+        .message.span {
+          grid-column: span 4;
+        }
+      }
+    }
+  }
+}

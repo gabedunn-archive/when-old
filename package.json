@@ -9,10 +9,23 @@
     "test:unit": "vue-cli-service test:unit"
   },
   "dependencies": {
+    "axios": "^0.18.0",
+    "babel-register": "^6.26.0",
+    "bulma": "^0.7.1",
+    "express": "^4.16.3",
+    "koa": "^2.5.2",
+    "koa-json": "^2.0.2",
+    "koa-router": "^7.4.0",
+    "koa-static": "^5.0.0",
+    "pug": "^2.0.3",
+    "r2": "^2.0.1",
     "register-service-worker": "^1.0.0",
     "vue": "^2.5.16",
+    "vue-meta": "^1.5.2",
     "vue-router": "^3.0.1",
-    "vuex": "^3.0.1"
+    "vuex": "^3.0.1",
+    "vuex-persist": "^1.4.3",
+    "whatwg-fetch": "^2.0.4"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "^3.0.0-rc.10",
@@ -25,6 +38,8 @@
     "babel-core": "7.0.0-bridge.0",
     "babel-jest": "^23.0.1",
     "node-sass": "^4.9.0",
+    "nodemon": "^1.18.3",
+    "rimraf": "^2.6.2",
     "sass-loader": "^7.0.1",
     "vue-template-compiler": "^2.5.16"
   }
