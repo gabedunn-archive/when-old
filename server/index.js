@@ -11,10 +11,16 @@ const r = new Router()
 
 app.use(koaJson())
 app.use(koaStatic(path.join(__dirname, '..', 'dist')))
+app.use(async (ctx, next) => {
+  ctx.set('Access-Control-Allow-Origin', '*');
+  ctx.set('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+  ctx.set('Access-Control-Allow-Methods', 'POST, GET, PUT, DELETE, OPTIONS');
+  await next();
+});
 
 r.get('/', home)
-r.get('/exchange', exchangeToken)
-r.get('/revoke', revokeToken)
+r.post('/exchange', exchangeToken)
+r.post('/revoke', revokeToken)
 
 app.use(r.routes())
 
@@ -22,5 +28,7 @@ async function home (ctx) {
   ctx.body = 'henlo fren'
 }
 
-app.listen(8080)
-console.log('Listening on port 8080...')
+const port = process.env.PORT || 8080
+
+app.listen(port)
+console.log(`Listening on port ${port}...`)
