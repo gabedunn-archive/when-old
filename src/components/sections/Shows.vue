@@ -11,11 +11,16 @@
     name: 'Shows',
     data () {
       return {
-        slugs: this.$store.state.slugs,
-        custom: false
+        slugs: []
       }
     },
+    async mounted () {
+      this.slugs = await this.computedSlugs
+    },
     computed: {
+      computedSlugs () {
+        return this.$store.getters.slugs
+      },
       key () {
         return this.custom ? 'custom-' : 'default-'
       }
