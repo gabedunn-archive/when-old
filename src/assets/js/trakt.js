@@ -15,7 +15,8 @@ const createHeaders = (oauth = false, token = false) => {
 export const getShow = async slug => {
   try {
     const headers = createHeaders()
-    const response = await r2.get(`${url}/shows/${slug}?extended=full`, {headers})
+    const response = await r2.get(`${url}/shows/${slug}?extended=full`,
+      {headers})
     return response.json
   } catch (e) {
     console.log(`Request for Trakt /shows/${slug} failed:`, e)
@@ -28,7 +29,8 @@ export const getShow = async slug => {
 export const getNextEpisode = async slug => {
   try {
     const headers = createHeaders()
-    const response = await r2.get(`${url}/shows/${slug}/next_episode?extended=full`, {headers})
+    const response = await r2.get(
+      `${url}/shows/${slug}/next_episode?extended=full`, {headers})
     const resp = await response.response
     if (resp.status === 204) {
       return new Promise((resolve, reject) => {
@@ -48,7 +50,8 @@ export const getNextEpisode = async slug => {
 export const getNextEpisodeInfo = async slug => {
   try {
     const headers = createHeaders()
-    return await r2.get(`${url}/shows/${slug}/next_episode?extended=full`, {headers}).json
+    return await r2.get(`${url}/shows/${slug}/next_episode?extended=full`,
+      {headers}).json
   } catch (e) {
     console.log(`Request for Trakt /shows/${slug}/next_episode failed:`, e)
     return new Promise((resolve, reject) => {
@@ -98,7 +101,8 @@ export const createWhenList = async token => {
     }
     return r2.post(`${url}/users/me/lists`, {json, headers}).json
   } catch (e) {
-    console.log('Request to Trakt /users/me/lists (create when list) failed:', e)
+    console.log('Request to Trakt /users/me/lists (create when list) failed:',
+      e)
     return new Promise((resolve, reject) => {
       reject(e)
     })
@@ -111,12 +115,10 @@ export const getOAuthURL = () => `https://trakt.tv/oauth/authorize?response_type
 export const getOAuthToken = async code => {
   try {
     const json = {code, clientID: process.env.VUE_APP_CLIENT_ID}
-    // const queryString = encodeURIComponent(JSON.stringify(json))
-    // const response = await r2.get(`http://localhost:8000/exchange?${queryString}`).json
-    const response = await r2.post(`http://localhost:8000/exchange`, {json})
-    // const response = await r2.post(`${process.env.VUE_APP_ORIGIN}/exchange`, {json})
-    const resp = await response.response
-    return await resp
+    const response = await r2.post(`${process.env.VUE_APP_API}/exchange`,
+      {json})
+    const resp = await response.json
+    return await resp.token
   } catch (e) {
     console.log('Request to exchange code for oauth token failed:', e)
     return new Promise((resolve, reject) => {
@@ -125,31 +127,23 @@ export const getOAuthToken = async code => {
   }
 }
 
-(async () => {
+export const checkOAuthToken = async token => {
   try {
-    console.log(await getOAuthToken('d8a89f31ac1e25ecf9819eabdb9e6ca8703bae8727cb2bb2067d1d3fffcfb495'))
+    const headers = createHeaders(true, token)
+    const response = await r2.get(`${url}/users/settings`, {headers})
+    return response.json
   } catch (e) {
-    console.log(e)
-  }
-})()
-
-export async function checkOAuthToken (token) {
-  const options = createOptions(createHeaders(true, token))
-  try {
-    const response = await axios.get(`${url}/users/settings`, options)
-    return response.data
-  } catch (err) {
-    console.log('Request to validate oauth token failed:', err)
+    console.log('Request to validate oauth token failed:', e)
     return new Promise((resolve, reject) => {
-      reject(err)
+      reject(e)
     })
   }
 }
 
-export async function revokeOAuthToken (token) {
+export const revokeOAuthToken = async token => {
   try {
-    const payload = {token}
-    return await axios.post(`${process.env.URL}/oauth/logout`, payload)
+    const payload = {json: token}
+    return await r2.post(`${process.env.VUE_APP_API}/revoke`, payload).json
   } catch (err) {
     console.log('Request to revoke oauth token failed:', err)
     return new Promise((resolve, reject) => {
