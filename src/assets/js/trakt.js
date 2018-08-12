@@ -131,7 +131,7 @@ export const checkOAuthToken = async token => {
   try {
     const headers = createHeaders(true, token)
     const response = await r2.get(`${url}/users/settings`, {headers})
-    return response.json
+    return !!response.json
   } catch (e) {
     console.log('Request to validate oauth token failed:', e)
     return new Promise((resolve, reject) => {
