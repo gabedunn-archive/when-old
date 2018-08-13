@@ -18,7 +18,6 @@
 <script>
   export default {
     name: 'Footer',
-    props: ['token'],
     data () {
       return {
         socialItems: [
