@@ -6,7 +6,12 @@
   // TODO: optimize countdown algorithm without so many date objects
   export default {
     name: 'Countdown',
-    props: ['date'],
+    props: {
+      date: {
+        type: String,
+        required: true
+      }
+    },
     data () {
       return {
         currentDate: new Date(),
@@ -15,10 +20,7 @@
     },
     computed: {
       calculateDate () {
-        const end = this.date
-        const current = this.currentDate
-        // noinspection JSCheckFunctionSignatures
-        const total = Date.parse(end) - Date.parse(current)
+        const total = Date.parse(this.date) - Date.parse(this.currentDate)
         const seconds = Math.floor((total / 1000) % 60)
         const minutes = Math.floor((total / 1000 / 60) % 60)
         const hours = Math.floor((total / (1000 * 60 * 60)) % 24)
