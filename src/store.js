@@ -18,7 +18,13 @@ export default new Vuex.Store({
     showData: {},
     custom: false
   },
-  getters: {},
+  getters: {
+    showTitle: (state) => (slug) => state.showData[slug]?.show?.title ||
+      'Loading...',
+    showPoster: (state) => (slug) => state.showData[slug]?.poster || null,
+    showStatus: (state) => (slug) => state.showData[slug]?.show?.status || null,
+    showDate: (state) => (slug) => state.showData[slug]?.date || null
+  },
   mutations: {
     changeToken (state, token) {
       state.token = token
@@ -31,6 +37,9 @@ export default new Vuex.Store({
     },
     changeCustom (state, status) {
       state.custom = status
+    },
+    setShowData (state, payload) {
+      Vue.set(state.showData, payload.slug, payload.data)
     }
   },
   actions: {
@@ -45,6 +54,9 @@ export default new Vuex.Store({
     },
     changeCustom (context, status) {
       context.commit('changeCustom', status)
+    },
+    setShowData (context, payload) {
+      context.commit('setShowData', payload)
     }
   }
   // plugins: [vuexPersist.plugin]

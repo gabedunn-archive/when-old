@@ -2,14 +2,14 @@
   <div class="show" :style="`order: ${this.order};`">
     <div>
       <div class="poster">
-        <img v-if="this.poster" :src="this.poster" />
-        <img v-else src="../assets/img/trakt.png" />
+        <img v-if="this.poster" :src="this.poster"/>
+        <img v-else src="../assets/img/trakt.png"/>
       </div>
       <div class="details">
         <h2>{{ title }}</h2>
         <Countdown v-if="this.date" :date="this.date"></Countdown>
-        <h3 v-else-if="this.status !== 'returning series'">{{ status }}</h3>
-        <h3 v-else>next to be announced</h3>
+        <h3 v-else-if="this.status !== 'returning series'">{{ status }}.</h3>
+        <h3 v-else>next to be announced.</h3>
       </div>
     </div>
   </div>
@@ -17,22 +17,50 @@
 
 <script>
   import Countdown from './Countdown.vue'
+  import { getShow, getNextEpisode } from '../assets/js/trakt'
+  import { getPoster } from '../assets/js/tmdb'
 
   export default {
     name: 'Show',
-    props: ['slug'],
-    data () {
-      return {
-        show: null,
-        poster: null,
-        date: null,
-        status: null,
-        modal: false
+    props: {
+      slug: {
+        type: String,
+        required: true
       }
     },
+    data () {
+      return {}
+    },
+    async mounted () {
+      const data = {}
+      try {
+        data.show = await getShow(this.slug)
+        try {
+          const path = await getPoster(data.show.ids.imdb)
+          data.poster = `https://image.tmdb.org/t/p/w500/${path}`
+        } catch (e) {
+          console.log('Failed to get show poster:', e)
+        }
+      } catch (e) {
+        console.log('Failed to get show data:', e)
+      }
+      try {
+        data.date = await getNextEpisode(this.slug)
+      } catch (e) { /* do nothing */ }
+      this.$store.dispatch('setShowData', {slug: this.slug, data})
+    },
     computed: {
-      title () { return this.show ? this.show.title : 'Loading...' },
-      order () { return this.date ? parseInt(Date.parse(this.date)) / 100000 : 150000000 }
+      title () { return this.$store.getters.showTitle(this.slug) },
+      poster () { return this.$store.getters.showPoster(this.slug) },
+      status () { return this.$store.getters.showStatus(this.slug) },
+      date () { return this.$store.getters.showDate(this.slug) },
+      order () {
+        return this.date
+          ? parseInt(Date.parse(this.date)) / 100000
+          : this.status === 'returning series'
+            ? 150000000
+            : this.status === 'canceled' ? 150000001 : 150000002
+      }
     },
     components: {
       Countdown
