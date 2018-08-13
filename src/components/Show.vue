@@ -46,6 +46,9 @@
       }
       try {
         data.date = await getNextEpisode(this.slug)
+        try {
+          data.nextEpisode = await getNextEpisodeInfo(this.slug)
+        } catch (e) { /* do nothing */ }
       } catch (e) { /* do nothing */ }
       this.$store.dispatch('setShowData', {slug: this.slug, data})
     },
