@@ -20,7 +20,7 @@
       return {}
     },
     async mounted () {
-      if (this.$store.state.token !== null) {
+      if (this.$store.state.token !== undefined) {
         try {
           await checkOAuthToken(this.$store.state.token)
           try {

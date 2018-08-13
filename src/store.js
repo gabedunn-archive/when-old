@@ -12,7 +12,7 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
     title: 'when.',
-    // token: null,
+    // token: undefined,
     token: process.env.VUE_APP_TEMP_TOKEN,
     slugs: [],
     showData: {},
@@ -21,16 +21,16 @@ export default new Vuex.Store({
   getters: {
     showTitle: (state) => (slug) => state.showData[slug]?.show?.title ||
       'Loading...',
-    showPoster: (state) => (slug) => state.showData[slug]?.poster || null,
-    showStatus: (state) => (slug) => state.showData[slug]?.show?.status || null,
-    showDate: (state) => (slug) => state.showData[slug]?.date || null
+    showPoster: (state) => (slug) => state.showData[slug]?.poster,
+    showStatus: (state) => (slug) => state.showData[slug]?.show?.status,
+    showDate: (state) => (slug) => state.showData[slug]?.date
   },
   mutations: {
     changeToken (state, token) {
       state.token = token
     },
-    nullToken (state) {
-      state.token = null
+    undefToken (state) {
+      state.token = undefined
     },
     changeSlugs (state, slugs) {
       state.slugs = slugs
@@ -46,8 +46,8 @@ export default new Vuex.Store({
     changeToken (context, token) {
       context.commit('changeToken', token)
     },
-    nullToken (context) {
-      context.commit('nullToken')
+    undefToken (context) {
+      context.commit('undefToken')
     },
     changeSlugs (context, slugs) {
       context.commit('changeSlugs', slugs)

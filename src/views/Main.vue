@@ -32,10 +32,10 @@
           this.$store.dispatch('changeToken', token)
         } catch (err) {
           console.log('Failed to acquire OAuth token:', err)
-          this.$store.dispatch('nullToken')
+          this.$store.dispatch('undefToken')
         }
         history.replaceState({}, this.$store.state.title, '/')
-      } else if (this.$store.state.token !== null) {
+      } else if (this.$store.state.token !== undefined) {
         console.log('Got token from persistent store.')
         console.log('Checking OAuth token...')
         try {
@@ -43,7 +43,7 @@
           console.log('OAuth token valid.')
         } catch (err) {
           console.log('OAuth token expired or not valid.')
-          this.$store.dispatch('nullToken')
+          this.$store.dispatch('undefToken')
         }
       } else {
         console.log('No OAuth token found.')
