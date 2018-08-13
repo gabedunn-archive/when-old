@@ -5,6 +5,8 @@ import Main from './views/Main.vue'
 Vue.use(Router)
 
 export default new Router({
+  // TODO: uncomment for history mode.
+  // mode: 'history',
   routes: [
     {
       path: '/',
@@ -14,7 +16,7 @@ export default new Router({
     // {
     //   path: '*',
     //   name: 'NotFound',
-    //   component: () => import(/* webpackChunkName: "about" */ './views/About.vue')
-    // }
+    //   component: () => import(/* webpackChunkName: "about" */
+    // './views/About.vue') }
   ]
 })
