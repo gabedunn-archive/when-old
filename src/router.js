@@ -16,7 +16,7 @@ export default new Router({
     // {
     //   path: '*',
     //   name: 'NotFound',
-    //   component: () => import(/* webpackChunkName: "about" */
-    // './views/About.vue') }
+    //   component: () => import(/* webpackChunkName: "notFound" */
+    // './views/NotFound.vue') }
   ]
 })
