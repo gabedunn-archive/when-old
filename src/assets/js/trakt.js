@@ -91,6 +91,21 @@ export const getWhenListItems = async token => {
   }
 }
 
+export const getDefaultListItems = async () => {
+  try {
+    const headers = createHeaders()
+    return r2.get(`${url}/users/redxtech/lists/default-when-list/items/shows`,
+      {headers}).json
+  } catch (e) {
+    console.log(
+      'Request for Trakt /users/redxtech/lists/default-when-list/items/shows failed:',
+      e)
+    return new Promise((resolve, reject) => {
+      reject(e)
+    })
+  }
+}
+
 export const createWhenList = async token => {
   try {
     const headers = createHeaders(true, token)

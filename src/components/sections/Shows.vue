@@ -6,7 +6,13 @@
 
 <script>
   import Show from '../Show.vue'
-  import { checkOAuthToken, getLists, checkForWhenList, getWhenListItems } from '../../assets/js/trakt'
+  import {
+    checkOAuthToken,
+    getLists,
+    checkForWhenList,
+    getWhenListItems,
+    getDefaultListItems
+  } from '../../assets/js/trakt'
 
   export default {
     name: 'Shows',
@@ -61,11 +67,17 @@
       Show
     },
     methods: {
-      useDefaultList () {
+      async useDefaultList () {
         if (this.$store.state.slugs.length === 0) {
-          this.$store.dispatch('changeCustom', false)
-          this.$store.dispatch('changeSlugs', ['game-of-thrones', 'shameless-2011'])
-          // TODO: set default list to actual list from trakt.
+          try {
+            const defaultWhenList = (await getDefaultListItems()).map(item => item.show.ids.slug)
+            this.$store.dispatch('changeCustom', false)
+            this.$store.dispatch('changeSlugs', defaultWhenList)
+          } catch (e) {
+            console.log('Error setting default list:', e)
+            this.$store.dispatch('changeCustom', false)
+            this.$store.dispatch('changeSlugs', ['game-of-thrones', 'shameless-2011'])
+          }
         }
       }
     }
