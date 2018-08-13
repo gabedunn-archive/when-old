@@ -3,7 +3,6 @@
 </template>
 
 <script>
-  // TODO: optimize countdown algorithm without so many date objects
   export default {
     name: 'Countdown',
     props: {
@@ -15,17 +14,13 @@
     data () {
       return {
         currentDate: new Date(),
-        interval: null
+        interval: undefined
       }
     },
     computed: {
       calculateDate () {
-        const total = Date.parse(this.date) - Date.parse(this.currentDate)
-        const seconds = Math.floor((total / 1000) % 60)
-        const minutes = Math.floor((total / 1000 / 60) % 60)
-        const hours = Math.floor((total / (1000 * 60 * 60)) % 24)
-        const days = Math.floor(total / (1000 * 60 * 60 * 24))
-        return `${parseInt(days, 10)}d ${parseInt(hours, 10)}h ${parseInt(minutes, 10)}m ${parseInt(seconds, 10)}s`
+        const dif = new Date(Date.parse(this.date) - this.currentDate)
+        return `${dif.getDate()}d ${dif.getHours()}h ${dif.getMinutes()}m ${dif.getSeconds()}s`
       }
     },
     mounted () {
