@@ -26,7 +26,6 @@
       },
       calculateDate2 () {
         const total = new Date(Date.parse(this.date) - this.currentDate)
-        // const total = Date.parse(this.date) - Date.parse(this.currentDate)
         const seconds = Math.floor((total / 1000) % 60)
         const minutes = Math.floor((total / 1000 / 60) % 60)
         const hours = Math.floor((total / (1000 * 60 * 60)) % 24)

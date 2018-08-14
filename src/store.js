@@ -19,11 +19,23 @@ export default new Vuex.Store({
     custom: false
   },
   getters: {
-    showTitle: (state) => (slug) => state.showData[slug]?.show?.title ||
+    showTitle: state => slug => state.showData[slug]?.show?.title ||
       'Loading...',
-    showPoster: (state) => (slug) => state.showData[slug]?.poster,
-    showStatus: (state) => (slug) => state.showData[slug]?.show?.status,
-    showDate: (state) => (slug) => state.showData[slug]?.date
+    showPoster: state => slug => state.showData[slug]?.poster,
+    showStatus: state => slug => state.showData[slug]?.show?.status,
+    showDate: state => slug => state.showData[slug]?.date,
+    showDescription: state => slug => state.showData[slug]?.show?.overview ||
+      'Loading',
+    showHomepage: state => slug => state.showData[slug]?.show?.homepage || '#',
+    showIDS: state => slug => state.showData[slug]?.show?.ids,
+    showNextEpisode: state => slug => !!state.showData[slug].nextEpisode,
+    showNextEpisodeTitle: state => slug => state.showData[slug]?.nextEpisode
+      ? state.showData[slug]?.nextEpisode?.title || 'title to be announced'
+      : 'Loading...',
+    showNextEpisodeDescription: state =>
+      slug => state.showData[slug]?.nextEpisode
+        ? state.showData[slug]?.nextEpisode?.overview || 'description to be' +
+        ' announced' : 'Loading...'
   },
   mutations: {
     changeToken (state, token) {

@@ -1,23 +1,25 @@
 <template>
   <div class="show" :style="`order: ${this.order};`">
-    <div>
+    <div @click="showModal">
       <div class="poster">
-        <img v-if="this.poster" :src="this.poster"/>
+        <img v-if="poster" :src="poster"/>
         <img v-else src="../assets/img/trakt.png"/>
       </div>
       <div class="details">
         <h2>{{ title }}</h2>
-        <Countdown v-if="this.date" :date="this.date"></Countdown>
-        <h3 v-else-if="this.status !== 'returning series'">{{ status }}.</h3>
+        <Countdown v-if="date" :date="date"></Countdown>
+        <h3 v-else-if="status !== 'returning series'">{{ status }}.</h3>
         <h3 v-else>next to be announced.</h3>
       </div>
     </div>
+    <show-modal v-if="modal" :slug="slug" @close="hideModal"/>
   </div>
 </template>
 
 <script>
   import Countdown from './Countdown.vue'
-  import { getShow, getNextEpisode } from '../assets/js/trakt'
+  import ShowModal from './ShowModal'
+  import { getShow, getNextEpisode, getNextEpisodeInfo } from '../assets/js/trakt'
   import { getPoster } from '../assets/js/tmdb'
 
   export default {
@@ -29,7 +31,9 @@
       }
     },
     data () {
-      return {}
+      return {
+        modal: false
+      }
     },
     async mounted () {
       const data = {}
@@ -66,9 +70,13 @@
       }
     },
     components: {
-      Countdown
+      Countdown,
+      ShowModal
     },
-    methods: {}
+    methods: {
+      showModal () { this.modal = true },
+      hideModal () { this.modal = false }
+    }
   }
 </script>
 
