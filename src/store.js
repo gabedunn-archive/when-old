@@ -12,13 +12,14 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
     title: 'when.',
-    // token: undefined,
-    token: process.env.VUE_APP_TEMP_TOKEN,
+    token: undefined,
+    // token: process.env.VUE_APP_TEMP_TOKEN,
     slugs: [],
     showData: {},
     custom: false
   },
   getters: {
+    loggedIn: state => !!state.token,
     showTitle: state => slug => state.showData[slug]?.show?.title ||
       'Loading...',
     showPoster: state => slug => state.showData[slug]?.poster,

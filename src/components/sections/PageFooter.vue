@@ -2,7 +2,8 @@
   <div class="footer">
     <div class="container">
       <div class="content has-text-centered">
-        <div>Public Beta v3.0 by Gabe Dunn | <a>Log In</a></div>
+        <div v-if="loggedIn">Public Beta v3.0 by Gabe Dunn | <a @click="logout">Log Out</a></div>
+        <div v-else>Public Beta v3.0 by Gabe Dunn | <a :href="loginURL">Log In</a></div>
         <ul class="social">
           <li v-for="(item, i) in socialItems" :key="i">
             <a :href="item.href" target="_blank">
@@ -16,6 +17,8 @@
 </template>
 
 <script>
+  import { getOAuthURL, revokeOAuthToken } from '../../assets/js/trakt'
+
   export default {
     name: 'Footer',
     data () {
@@ -24,7 +27,17 @@
           {type: 'Twitter', href: 'https://twitter.com/redxtechx', icon: 'twitter'},
           {type: 'Email', href: 'mailto:gabe@redxtech.ca', icon: 'mail'},
           {type: 'YouTube', href: 'https://www.youtube.com/c/redxtech', icon: 'youtube'}
-        ]
+        ],
+        loginURL: getOAuthURL()
+      }
+    },
+    computed: {
+      loggedIn () { return this.$store.getters.loggedIn }
+    },
+    methods: {
+      logout () {
+        revokeOAuthToken(this.$store.state.token)
+        this.$store.dispatch('undefToken')
       }
     }
   }

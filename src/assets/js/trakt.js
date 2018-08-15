@@ -157,7 +157,7 @@ export const checkOAuthToken = async token => {
 
 export const revokeOAuthToken = async token => {
   try {
-    const payload = {json: token}
+    const payload = {json: {token, clientID: process.env.VUE_APP_CLIENT_ID}}
     return await r2.post(`${process.env.VUE_APP_API}/revoke`, payload).json
   } catch (err) {
     console.log('Request to revoke oauth token failed:', err)
