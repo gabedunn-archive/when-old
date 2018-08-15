@@ -1,11 +1,11 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-// import VuexPersist from 'vuex-persist'
+import VuexPersist from 'vuex-persist'
 
-// const vuexPersist = new VuexPersist({
-//   key: 'when',
-//   storage: localStorage
-// })
+const vuexPersist = new VuexPersist({
+  key: 'when',
+  storage: localStorage
+})
 
 Vue.use(Vuex)
 
@@ -13,7 +13,6 @@ export default new Vuex.Store({
   state: {
     title: 'when.',
     token: undefined,
-    // token: process.env.VUE_APP_TEMP_TOKEN,
     slugs: [],
     showData: {},
     custom: false
@@ -53,6 +52,9 @@ export default new Vuex.Store({
     },
     setShowData (state, payload) {
       Vue.set(state.showData, payload.slug, payload.data)
+    },
+    unsetSlugs (state) {
+      state.slugs = []
     }
   },
   actions: {
@@ -70,7 +72,10 @@ export default new Vuex.Store({
     },
     setShowData (context, payload) {
       context.commit('setShowData', payload)
+    },
+    unsetSlugs (context) {
+      context.commit('unsetSlugs')
     }
-  }
-  // plugins: [vuexPersist.plugin]
+  },
+  plugins: [vuexPersist.plugin]
 })

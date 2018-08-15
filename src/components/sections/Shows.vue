@@ -90,6 +90,9 @@
     },
     watch: {
       async token () {
+        if (!this.token) {
+          this.$store.dispatch('unsetSlugs')
+        }
         await this.init()
       }
     }
