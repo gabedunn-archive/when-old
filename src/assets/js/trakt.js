@@ -133,7 +133,7 @@ export const getOAuthToken = async code => {
     const response = await r2.post(`${process.env.VUE_APP_API}/exchange`,
       {json})
     const resp = await response.json
-    return await resp.token
+    return await resp.access_token
   } catch (e) {
     console.log('Request to exchange code for oauth token failed:', e)
     return new Promise((resolve, reject) => {

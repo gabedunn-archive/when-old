@@ -1,6 +1,7 @@
 const Koa = require('koa')
 const Router = require('koa-router')
 const koaJson = require('koa-json')
+const bodyParser = require('koa-bodyparser')
 // const koaStatic = require('koa-static')
 
 const {exchangeToken, revokeToken} = require('./auth')
@@ -13,6 +14,7 @@ app.use(koaJson())
 // app.use(koaStatic(join(__dirname, '..', 'dist')))
 app.use(cors)
 app.use(responseTime)
+app.use(bodyParser())
 
 r.get('/', home)
 r.all('/exchange', exchangeToken)
