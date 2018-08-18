@@ -31,7 +31,7 @@
           console.log('Acquired OAUth token:', token)
           this.$store.dispatch('changeToken', token)
         } catch (err) {
-          console.log('Failed to acquire OAuth token:', err)
+          console.error('Failed to acquire OAuth token:', err)
           this.$store.dispatch('undefToken')
         }
         history.replaceState({}, this.$store.state.title, '/')
@@ -42,7 +42,7 @@
           await checkOAuthToken(this.$store.state.token)
           console.log('OAuth token valid.')
         } catch (err) {
-          console.log('OAuth token expired or not valid.')
+          console.error('OAuth token expired or not valid.')
           this.$store.dispatch('undefToken')
         }
       } else {

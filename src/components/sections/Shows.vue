@@ -6,7 +6,7 @@
       title="sign in for your own list."
       message="click to login."
       :link="loginURL"
-      order="150000002"
+      :order="$store.getters.shiftedOrder(3)"
     />
   </div>
 </template>
@@ -66,7 +66,7 @@
                     this.$store.dispatch('changeSlugs', whenListItems)
                   }
                 } catch (e) {
-                  console.log('Failed to get when list items:', e)
+                  console.error('Failed to get when list items:', e)
                   this.useDefaultList()
                 }
               } else {
@@ -74,11 +74,11 @@
                 this.useDefaultList()
               }
             } catch (e) {
-              console.log('Failed to get lists:', e)
+              console.error('Failed to get lists:', e)
               this.useDefaultList()
             }
           } catch (e) {
-            console.log('Unable to check OAuth token:', e)
+            console.error('Unable to check OAuth token:', e)
             this.useDefaultList()
           }
         } else {
@@ -91,7 +91,7 @@
             const defaultWhenList = (await getDefaultListItems()).map(item => item.show.ids.slug)
             this.$store.dispatch('changeSlugs', defaultWhenList)
           } catch (e) {
-            console.log('Error setting default list:', e)
+            console.error('Error setting default list:', e)
             this.$store.dispatch('changeSlugs', ['game-of-thrones', 'shameless-2011'])
           }
         }

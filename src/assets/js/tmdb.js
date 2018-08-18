@@ -9,7 +9,7 @@ export const getPoster = async id => {
     ).json
     return response.tv_results[0].poster_path
   } catch (e) {
-    console.log(`getPoster for TMDB/${id} failed:`, e)
+    console.error(`getPoster for TMDB/${id} failed:`, e)
     return new Promise((resolve, reject) => {
       reject(e)
     })

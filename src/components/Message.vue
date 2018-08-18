@@ -50,9 +50,8 @@
         validator: value => ['', '_blank', '_self', '_parent', '_top'].includes(value)
       },
       order: {
-        type: String,
-        required: true,
-        validator: value => !isNaN(value)
+        type: Number,
+        required: true
       }
     },
     data () {

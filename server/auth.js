@@ -29,7 +29,7 @@ const exchangeToken = async (ctx) => {
       ctx.body = await request.json
       ctx.status = 200
     } catch (e) {
-      console.log('Error:', e)
+      console.error('Error:', e)
       ctx.status = 401
       ctx.body = {
         endpoint: 'exchange',
@@ -68,7 +68,7 @@ const revokeToken = async (ctx) => {
       ctx.body = await request.json
       ctx.status = 200
     } catch (e) {
-      console.log('Error:', e)
+      console.error('Error:', e)
       ctx.status = 401
       ctx.body = {
         endpoint: 'revoke',

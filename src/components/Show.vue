@@ -43,10 +43,10 @@
           const path = await getPoster(data.show.ids.imdb)
           data.poster = `https://image.tmdb.org/t/p/w500/${path}`
         } catch (e) {
-          console.log('Failed to get show poster:', e)
+          console.error('Failed to get show poster:', e)
         }
       } catch (e) {
-        console.log('Failed to get show data:', e)
+        console.error('Failed to get show data:', e)
       }
       try {
         data.date = await getNextEpisode(this.slug)
@@ -61,12 +61,13 @@
       poster () { return this.$store.getters.showPoster(this.slug) },
       status () { return this.$store.getters.showStatus(this.slug) },
       date () { return this.$store.getters.showDate(this.slug) },
+      shiftedOrder () { return this.$store.getters.shiftedOrder },
       order () {
         return this.date
           ? parseInt(Date.parse(this.date)) / 100000
           : this.status === 'returning series'
-            ? 150000000
-            : this.status === 'canceled' ? 150000001 : 150000002
+            ? this.shiftedOrder(0)
+            : this.status === 'canceled' ? this.shiftedOrder(1) : this.shiftedOrder(2)
       }
     },
     components: {

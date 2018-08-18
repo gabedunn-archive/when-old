@@ -14,10 +14,12 @@ export default new Vuex.Store({
     title: 'when.',
     token: undefined,
     slugs: [],
-    showData: {}
+    showData: {},
+    defaultOrder: 150000002
   },
   getters: {
     loggedIn: state => !!state.token,
+    shiftedOrder: state => shift => state.defaultChecked + shift,
     showTitle: state => slug => state.showData[slug]?.show?.title ||
       'Loading...',
     showPoster: state => slug => state.showData[slug]?.poster,

@@ -19,7 +19,7 @@ export const getShow = async slug => {
       {headers})
     return response.json
   } catch (e) {
-    console.log(`Request for Trakt /shows/${slug} failed:`, e)
+    console.error(`Request for Trakt /shows/${slug} failed:`, e)
     return new Promise((resolve, reject) => {
       reject(e)
     })
@@ -40,7 +40,7 @@ export const getNextEpisode = async slug => {
     const json = await response.json
     return json.first_aired
   } catch (e) {
-    console.log(`Request for Trakt /shows/${slug}/next_episode failed:`, e)
+    console.error(`Request for Trakt /shows/${slug}/next_episode failed:`, e)
     return new Promise((resolve, reject) => {
       reject(e)
     })
@@ -53,7 +53,7 @@ export const getNextEpisodeInfo = async slug => {
     return await r2.get(`${url}/shows/${slug}/next_episode?extended=full`,
       {headers}).json
   } catch (e) {
-    console.log(`Request for Trakt /shows/${slug}/next_episode failed:`, e)
+    console.error(`Request for Trakt /shows/${slug}/next_episode failed:`, e)
     return new Promise((resolve, reject) => {
       reject(e)
     })
@@ -65,7 +65,7 @@ export const getLists = async token => {
     const headers = createHeaders(true, token)
     return r2.get(`${url}/users/me/lists`, {headers}).json
   } catch (e) {
-    console.log('Request for /users/me/lists failed:', e)
+    console.error('Request for /users/me/lists failed:', e)
     return new Promise((resolve, reject) => {
       reject(e)
     })
@@ -84,7 +84,7 @@ export const getWhenListItems = async token => {
     const headers = createHeaders(true, token)
     return r2.get(`${url}/users/me/lists/when/items/shows`, {headers}).json
   } catch (e) {
-    console.log('Request for Trakt /users/me/lists/when/items/shows failed:', e)
+    console.error('Request for Trakt /users/me/lists/when/items/shows failed:', e)
     return new Promise((resolve, reject) => {
       reject(e)
     })
@@ -97,7 +97,7 @@ export const getDefaultListItems = async () => {
     return r2.get(`${url}/users/redxtech/lists/default-when-list/items/shows`,
       {headers}).json
   } catch (e) {
-    console.log(
+    console.error(
       'Request for Trakt /users/redxtech/lists/default-when-list/items/shows failed:',
       e)
     return new Promise((resolve, reject) => {
@@ -116,7 +116,7 @@ export const createWhenList = async token => {
     }
     return r2.post(`${url}/users/me/lists`, {json, headers}).json
   } catch (e) {
-    console.log('Request to Trakt /users/me/lists (create when list) failed:',
+    console.error('Request to Trakt /users/me/lists (create when list) failed:',
       e)
     return new Promise((resolve, reject) => {
       reject(e)
@@ -135,7 +135,7 @@ export const getOAuthToken = async code => {
     const resp = await response.json
     return await resp.access_token
   } catch (e) {
-    console.log('Request to exchange code for oauth token failed:', e)
+    console.error('Request to exchange code for oauth token failed:', e)
     return new Promise((resolve, reject) => {
       reject(e)
     })
@@ -148,7 +148,7 @@ export const checkOAuthToken = async token => {
     const response = await r2.get(`${url}/users/settings`, {headers})
     return !!response.json
   } catch (e) {
-    console.log('Request to validate oauth token failed:', e)
+    console.error('Request to validate oauth token failed:', e)
     return new Promise((resolve, reject) => {
       reject(e)
     })
@@ -160,7 +160,7 @@ export const revokeOAuthToken = async token => {
     const payload = {json: {token, clientID: process.env.VUE_APP_CLIENT_ID}}
     return await r2.post(`${process.env.VUE_APP_API}/revoke`, payload).json
   } catch (err) {
-    console.log('Request to revoke oauth token failed:', err)
+    console.error('Request to revoke oauth token failed:', err)
     return new Promise((resolve, reject) => {
       reject(err)
     })
