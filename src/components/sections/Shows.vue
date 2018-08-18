@@ -1,6 +1,6 @@
 <template>
   <div class="shows">
-    <show v-for="(slug, i) in slugs" :slug="slug" :key="key + i"></show>
+    <show v-for="slug in slugs" :slug="slug" :key="slug"></show>
     <message
       v-if="!loggedIn"
       title="sign in for your own list."
@@ -37,9 +37,6 @@
       slugs () {
         return this.$store.state.slugs
       },
-      key () {
-        return this.$store.state.custom ? 'custom-' : 'default-'
-      },
       token () {
         return this.$store.state.token
       },
@@ -66,7 +63,6 @@
                   if (whenListItems.length === 0) {
                     this.useDefaultList()
                   } else {
-                    this.$store.dispatch('changeCustom', true)
                     this.$store.dispatch('changeSlugs', whenListItems)
                   }
                 } catch (e) {
@@ -93,11 +89,9 @@
         if (this.$store.state.slugs.length === 0) {
           try {
             const defaultWhenList = (await getDefaultListItems()).map(item => item.show.ids.slug)
-            this.$store.dispatch('changeCustom', false)
             this.$store.dispatch('changeSlugs', defaultWhenList)
           } catch (e) {
             console.log('Error setting default list:', e)
-            this.$store.dispatch('changeCustom', false)
             this.$store.dispatch('changeSlugs', ['game-of-thrones', 'shameless-2011'])
           }
         }

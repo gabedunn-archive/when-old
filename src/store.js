@@ -14,8 +14,7 @@ export default new Vuex.Store({
     title: 'when.',
     token: undefined,
     slugs: [],
-    showData: {},
-    custom: false
+    showData: {}
   },
   getters: {
     loggedIn: state => !!state.token,
@@ -47,9 +46,6 @@ export default new Vuex.Store({
     changeSlugs (state, slugs) {
       state.slugs = slugs
     },
-    changeCustom (state, status) {
-      state.custom = status
-    },
     setShowData (state, payload) {
       Vue.set(state.showData, payload.slug, payload.data)
     },
@@ -66,9 +62,6 @@ export default new Vuex.Store({
     },
     changeSlugs (context, slugs) {
       context.commit('changeSlugs', slugs)
-    },
-    changeCustom (context, status) {
-      context.commit('changeCustom', status)
     },
     setShowData (context, payload) {
       context.commit('setShowData', payload)
