@@ -1,23 +1,34 @@
 <template>
   <div class="shows">
     <show v-for="(slug, i) in slugs" :slug="slug" :key="key + i"></show>
+    <message
+      v-if="!loggedIn"
+      title="sign in for your own list."
+      message="click to login."
+      :link="loginURL"
+      order="150000002"
+    />
   </div>
 </template>
 
 <script>
   import Show from '../Show.vue'
+  import Message from '../Message'
   import {
     checkOAuthToken,
     getLists,
     checkForWhenList,
     getWhenListItems,
-    getDefaultListItems
+    getDefaultListItems,
+    getOAuthURL
   } from '../../assets/js/trakt'
 
   export default {
     name: 'Shows',
     data () {
-      return {}
+      return {
+        loginURL: getOAuthURL()
+      }
     },
     async mounted () {
       await this.init()
@@ -31,10 +42,14 @@
       },
       token () {
         return this.$store.state.token
+      },
+      loggedIn () {
+        return this.$store.getters.loggedIn
       }
     },
     components: {
-      Show
+      Show,
+      Message
     },
     methods: {
       async init () {
