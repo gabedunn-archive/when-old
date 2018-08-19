@@ -15,11 +15,11 @@ export default new Vuex.Store({
     token: undefined,
     slugs: [],
     showData: {},
-    defaultOrder: 150000002
+    defaultOrder: 150000000
   },
   getters: {
     loggedIn: state => !!state.token,
-    shiftedOrder: state => shift => state.defaultChecked + shift,
+    shiftedOrder: state => shift => state.defaultOrder + shift,
     showTitle: state => slug => state.showData[slug]?.show?.title ||
       'Loading...',
     showPoster: state => slug => state.showData[slug]?.poster,
