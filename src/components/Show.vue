@@ -21,6 +21,7 @@
   import ShowModal from './ShowModal'
   import { getShow, getNextEpisode, getNextEpisodeInfo } from '../assets/js/trakt'
   import { getPoster } from '../assets/js/tmdb'
+  import { getImageAsBase64 } from '../assets/js/image'
 
   export default {
     name: 'Show',
@@ -41,7 +42,11 @@
         data.show = await getShow(this.slug)
         try {
           const path = await getPoster(data.show.ids.imdb)
-          data.poster = `https://image.tmdb.org/t/p/w500/${path}`
+          try {
+            data.poster = await getImageAsBase64(`https://image.tmdb.org/t/p/w500/${path}`)
+          } catch (e) {
+            console.error('Failed to fetch base64 poster:', e)
+          }
         } catch (e) {
           console.error('Failed to get show poster:', e)
         }
