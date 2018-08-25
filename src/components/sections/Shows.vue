@@ -20,7 +20,8 @@
     checkForWhenList,
     getWhenListItems,
     getDefaultListItems,
-    getOAuthURL
+    getOAuthURL,
+    createWhenList
   } from '../../assets/js/trakt'
 
   export default {
@@ -70,7 +71,11 @@
                   this.useDefaultList()
                 }
               } else {
-                // create when list
+                try {
+                  createWhenList(this.$store.state.token)
+                } catch (e) {
+                  console.error('Failed to create when list:', e)
+                }
                 this.useDefaultList()
               }
             } catch (e) {
