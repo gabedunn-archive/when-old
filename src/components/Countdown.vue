@@ -36,6 +36,9 @@
     mounted () {
       this.interval = setInterval(() => {
         this.currentDate = new Date()
+        if (this.currentDate < new Date(Date.parse(this.date))) {
+          this.$emit('zeroed')
+        }
       }, 1000)
     },
     beforeDestroy () {

@@ -7,7 +7,7 @@
       </div>
       <div class="details">
         <h2>{{ title }}</h2>
-        <Countdown v-if="date" :date="date"></Countdown>
+        <Countdown v-if="date" :date="date" @zeroed="init"></Countdown>
         <h3 v-else-if="status !== 'returning series'">{{ status }}.</h3>
         <h3 v-else>next to be announced.</h3>
       </div>
@@ -37,29 +37,7 @@
       }
     },
     async mounted () {
-      const data = {}
-      try {
-        data.show = await getShow(this.slug)
-        try {
-          const path = await getPoster(data.show.ids.imdb)
-          try {
-            data.poster = await getImageAsBase64(`https://image.tmdb.org/t/p/w500/${path}`)
-          } catch (e) {
-            console.error('Failed to fetch base64 poster:', e)
-          }
-        } catch (e) {
-          console.error('Failed to get show poster:', e)
-        }
-      } catch (e) {
-        console.error('Failed to get show data:', e)
-      }
-      try {
-        data.date = await getNextEpisode(this.slug)
-        try {
-          data.nextEpisode = await getNextEpisodeInfo(this.slug)
-        } catch (e) { /* do nothing */ }
-      } catch (e) { /* do nothing */ }
-      this.$store.dispatch('setShowData', {slug: this.slug, data})
+      await this.init()
     },
     computed: {
       title () { return this.$store.getters.showTitle(this.slug) },
@@ -80,6 +58,31 @@
       ShowModal
     },
     methods: {
+      async init () {
+        const data = {}
+        try {
+          data.show = await getShow(this.slug)
+          try {
+            const path = await getPoster(data.show.ids.imdb)
+            try {
+              data.poster = await getImageAsBase64(`https://image.tmdb.org/t/p/w500/${path}`)
+            } catch (e) {
+              console.error('Failed to fetch base64 poster:', e)
+            }
+          } catch (e) {
+            console.error('Failed to get show poster:', e)
+          }
+        } catch (e) {
+          console.error('Failed to get show data:', e)
+        }
+        try {
+          data.date = await getNextEpisode(this.slug)
+          try {
+            data.nextEpisode = await getNextEpisodeInfo(this.slug)
+          } catch (e) { /* do nothing */ }
+        } catch (e) { /* do nothing */ }
+        this.$store.dispatch('setShowData', {slug: this.slug, data})
+      },
       showModal () { this.modal = true },
       hideModal () { this.modal = false }
     }
