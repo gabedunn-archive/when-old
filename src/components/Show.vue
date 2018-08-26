@@ -3,7 +3,7 @@
     <div @click="showModal">
       <div class="poster">
         <img v-if="poster" :src="poster"/>
-        <img v-else src="../assets/img/trakt.png"/>
+        <img v-else src="../assets/img/trakt-icon-red.svg"/>
       </div>
       <div class="details">
         <h2>{{ title }}</h2>
@@ -130,10 +130,13 @@
       min-width: 65px;
       height: 97.5px;
       margin-right: 1rem;
+      display: flex;
+      align-items: center;
 
       img {
         border-radius: 4px;
-        max-width: 100%;
+        width: 100%;
+        height: auto;
       }
     }
 

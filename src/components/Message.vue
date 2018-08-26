@@ -3,7 +3,7 @@
     <div>
       <div class="poster">
         <a :href="link" :target="targetText">
-          <img src="../assets/img/trakt.png">
+          <img src="../assets/img/trakt-icon-red.svg">
         </a>
       </div>
       <div class="details">
@@ -108,10 +108,13 @@
       min-width: 65px;
       height: 97.5px;
       margin-right: 1rem;
+      display: flex;
+      align-items: center;
 
       img {
         border-radius: 4px;
-        max-width: 100%;
+        width: 100%;
+        height: auto;
       }
     }
 
