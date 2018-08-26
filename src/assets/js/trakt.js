@@ -84,7 +84,8 @@ export const getWhenListItems = async token => {
     const headers = createHeaders(true, token)
     return r2.get(`${url}/users/me/lists/when/items/shows`, {headers}).json
   } catch (e) {
-    console.error('Request for Trakt /users/me/lists/when/items/shows failed:', e)
+    console.error('Request for Trakt /users/me/lists/when/items/shows failed:',
+      e)
     return new Promise((resolve, reject) => {
       reject(e)
     })
@@ -117,6 +118,37 @@ export const createWhenList = async token => {
     return r2.post(`${url}/users/me/lists`, {json, headers}).json
   } catch (e) {
     console.error('Request to Trakt /users/me/lists (create when list) failed:',
+      e)
+    return new Promise((resolve, reject) => {
+      reject(e)
+    })
+  }
+}
+
+export const addShowToWhenList = async (token, slug) => {
+  try {
+    const headers = createHeaders(true, token)
+    const json = {shows: [{ids: {slug}}]}
+    const req = await r2.post(
+      `${url}/users/me/lists/when/items`, {json, headers})
+    return await req.json
+  } catch (e) {
+    console.error('Request to Trakt /users/me/lists/when/items failed:', e)
+    return new Promise((resolve, reject) => {
+      reject(e)
+    })
+  }
+}
+
+export const removeShowFromWhenList = async (token, slug) => {
+  try {
+    const headers = createHeaders(true, token)
+    const json = {shows: [{ids: {slug}}]}
+    const req = await r2.post(
+      `${url}/users/me/lists/when/items/remove`, {json, headers})
+    return await req.json
+  } catch (e) {
+    console.error('Request to Trakt /users/me/lists/when/items/remove failed:',
       e)
     return new Promise((resolve, reject) => {
       reject(e)
