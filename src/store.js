@@ -48,6 +48,12 @@ export default new Vuex.Store({
     changeSlugs (state, slugs) {
       state.slugs = slugs
     },
+    addSlug (state, slug) {
+      state.slugs = state.slugs.concat(slug)
+    },
+    removeSlug (state, slug) {
+      state.slugs = state.slugs.filter(newSlug => newSlug !== slug)
+    },
     setShowData (state, payload) {
       Vue.set(state.showData, payload.slug, payload.data)
     },
@@ -61,6 +67,12 @@ export default new Vuex.Store({
     },
     undefToken (context) {
       context.commit('undefToken')
+    },
+    addSlug (context, slug) {
+      context.commit('addSlug', slug)
+    },
+    removeSlug (context, slug) {
+      context.commit('removeSlug', slug)
     },
     changeSlugs (context, slugs) {
       context.commit('changeSlugs', slugs)
