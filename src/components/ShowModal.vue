@@ -7,6 +7,7 @@
       <header class="modal-card-head">
         <p class="modal-card-title">
           <a :href="homepage" :target="linkTarget" v-text="title"></a>
+          <template v-if="loggedIn"> - <a class="remove" @click="remove">Remove</a></template>
         </p>
         <i class="material-icons close" @click="$emit('close')">close</i>
       </header>
@@ -44,6 +45,7 @@
 
 <script>
   import Countdown from './Countdown.vue'
+  import { removeShowFromWhenList } from '../assets/js/trakt'
 
   export default {
     name: 'ShowModal',
@@ -55,6 +57,7 @@
       Countdown
     },
     computed: {
+      loggedIn () { return this.$store.getters.loggedIn },
       title () { return this.$store.getters.showTitle(this.slug) },
       poster () { return this.$store.getters.showPoster(this.slug) },
       status () { return this.$store.getters.showStatus(this.slug) },
@@ -74,7 +77,21 @@
       hasTrakt () { return this.ids ? this.ids.hasOwnProperty('trakt') ? this.ids.trakt : false : false },
       linkTarget () { return this.homepage ? '_blank' : '' }
     },
-    async mounted () {}
+    async mounted () {},
+    methods: {
+      async remove () {
+        try {
+          const remove = await removeShowFromWhenList(this.$store.state.token, this.slug)
+          if (remove.deleted.shows === 1) {
+            this.$store.dispatch('changeSlugs', this.$store.state.slugs.filter(slug => slug !== this.slug))
+          } else {
+            console.error('Failed to remove show from list.')
+          }
+        } catch (e) {
+          console.error('Failed to remove show from list:', e)
+        }
+      }
+    }
   }
 </script>
 
@@ -246,6 +263,10 @@
       &:hover {
         text-decoration: underline;
       }
+    }
+
+    .remove {
+      color: red;
     }
   }
 
