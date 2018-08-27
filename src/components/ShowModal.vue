@@ -83,7 +83,7 @@
         try {
           const remove = await removeShowFromWhenList(this.$store.state.token, this.slug)
           if (remove.deleted.shows === 1) {
-            this.$store.dispatch('changeSlugs', this.$store.state.slugs.filter(slug => slug !== this.slug))
+            this.$store.dispatch('removeSlug', this.slug)
           } else {
             console.error('Failed to remove show from list.')
           }
