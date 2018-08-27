@@ -1,6 +1,6 @@
 <template>
   <div class="show message" :style="`order: ${this.orderStyle};`">
-    <div>
+    <div @click="showModal">
       <div class="poster">
         <img src="../assets/img/plus.svg">
       </div>
@@ -9,12 +9,15 @@
         <h3 v-text="message"></h3>
       </div>
     </div>
+    <add-show-modal v-if="modal" :title="title" @close="hideModal"/>
   </div>
 </template>
 
 <script>
+  import AddShowModal from './AddShowModal'
+
   export default {
-    name: 'Message',
+    name: 'AddShow',
     props: {
       order: {
         type: Number,
@@ -23,13 +26,16 @@
     },
     data () {
       return {
-        title: 'add show.',
+        title: 'add show',
         message: 'click to add a new show.',
         modal: false
       }
     },
     computed: {
       orderStyle () { return this.order ? this.order : 150000000 }
+    },
+    components: {
+      AddShowModal
     },
     methods: {
       showModal () {

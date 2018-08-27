@@ -8,12 +8,14 @@
       :link="loginURL"
       :order="$store.getters.shiftedOrder(3)"
     />
+    <add-show v-if="loggedIn" :order="$store.getters.shiftedOrder(4)"/>
   </div>
 </template>
 
 <script>
   import Show from '../Show.vue'
   import Message from '../Message'
+  import AddShow from '../AddShow'
   import {
     checkOAuthToken,
     getLists,
@@ -47,7 +49,8 @@
     },
     components: {
       Show,
-      Message
+      Message,
+      AddShow
     },
     methods: {
       async init () {
