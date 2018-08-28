@@ -15,6 +15,7 @@ export default new Vuex.Store({
     token: undefined,
     slugs: [],
     showData: {},
+    defaultList: true,
     defaultOrder: 150000000
   },
   getters: {
@@ -59,6 +60,9 @@ export default new Vuex.Store({
     },
     unsetSlugs (state) {
       state.slugs = []
+    },
+    changeDefaultList (state, status) {
+      state.defaultList = status
     }
   },
   actions: {
@@ -82,6 +86,9 @@ export default new Vuex.Store({
     },
     unsetSlugs (context) {
       context.commit('unsetSlugs')
+    },
+    changeDefaultList (context, status) {
+      context.commit('changeDefaultList', status)
     }
   },
   plugins: [vuexPersist.plugin]

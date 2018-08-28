@@ -68,6 +68,7 @@
                     this.useDefaultList()
                   } else {
                     this.$store.dispatch('changeSlugs', whenListItems)
+                    this.$store.dispatch('changeDefaultList', false)
                   }
                 } catch (e) {
                   console.error('Failed to get when list items:', e)
@@ -95,6 +96,7 @@
       },
       async useDefaultList () {
         if (this.$store.state.slugs.length === 0) {
+          this.$store.dispatch('changeDefaultList', true)
           try {
             const defaultWhenList = (await getDefaultListItems()).map(item => item.show.ids.slug)
             this.$store.dispatch('changeSlugs', defaultWhenList)

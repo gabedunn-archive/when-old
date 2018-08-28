@@ -7,7 +7,7 @@
       <header class="modal-card-head">
         <p class="modal-card-title">
           <a :href="homepage" :target="linkTarget" v-text="title"></a>
-          <template v-if="loggedIn"> - <a class="remove" @click="remove">Remove</a></template>
+          <template v-if="loggedIn && !defaultList"> - <a class="remove" @click="remove">Remove</a></template>
         </p>
         <i class="material-icons close" @click="$emit('close')">close</i>
       </header>
@@ -58,6 +58,7 @@
     },
     computed: {
       loggedIn () { return this.$store.getters.loggedIn },
+      defaultList () { return this.$store.state.defaultList },
       title () { return this.$store.getters.showTitle(this.slug) },
       poster () { return this.$store.getters.showPoster(this.slug) },
       status () { return this.$store.getters.showStatus(this.slug) },
