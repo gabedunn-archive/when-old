@@ -7,7 +7,7 @@
       </div>
       <div class="details">
         <h2>{{ title }}</h2>
-        <Countdown v-if="date" :date="date" @zeroed="init"></Countdown>
+        <Countdown v-if="date" :date="date" @zeroed="zeroed"></Countdown>
         <h3 v-else-if="status !== 'returning series'">{{ status }}.</h3>
         <h3 v-else>next to be announced.</h3>
       </div>
@@ -82,6 +82,9 @@
           } catch (e) { /* do nothing */ }
         } catch (e) { /* do nothing */ }
         this.$store.dispatch('setShowData', {slug: this.slug, data})
+      },
+      async zeroed () {
+        await this.init()
       },
       showModal () { this.modal = true },
       hideModal () { this.modal = false }
