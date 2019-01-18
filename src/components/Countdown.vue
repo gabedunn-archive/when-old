@@ -1,5 +1,5 @@
 <template>
-  <h3 v-text="this.calculateDate"></h3>
+  <h3 v-text="calculateDate" />
 </template>
 
 <script>

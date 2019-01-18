@@ -2,42 +2,116 @@
   <div class="modal">
     <!--<img v-if="this.backdrop" :src="this.backdrop" class="modal-background" @click="$emit('close')" />-->
     <!--<div v-else="this.backdrop" class="modal-background" @click="$emit('close')"></div>-->
-    <div class="modal-background" @click="$emit('close')"></div>
+    <div
+      class="modal-background"
+      @click="$emit('close')"
+    />
     <div class="modal-card">
       <header class="modal-card-head">
         <p class="modal-card-title">
-          <a :href="homepage" :target="linkTarget" v-text="title"></a>
-          <template v-if="loggedIn && !defaultList"> - <a class="remove" @click="remove">Remove</a></template>
+          <a
+            :href="homepage"
+            :target="linkTarget"
+            v-text="title"
+          />
+          <template v-if="loggedIn && !defaultList">
+            - <a
+              class="remove"
+              @click="remove"
+            >
+              Remove
+            </a>
+          </template>
         </p>
-        <i class="material-icons close" @click="$emit('close')">close</i>
+        <i
+          class="material-icons close"
+          @click="$emit('close')"
+        >
+          close
+        </i>
       </header>
       <section class="modal-card-body">
         <div class="show-info modal-body-content">
-          <p v-text="description"></p>
+          <p v-text="description" />
           <div class="links">
-            <h3><a :href="homepage" :target="linkTarget">Homepage</a></h3>
-            <h3 v-if="hasImdb"><a :href="imdbLink" :target="linkTarget">IMDb</a></h3>
-            <h3 v-if="hasTmdb"><a :href="tmdbLink" :target="linkTarget">TMDb</a></h3>
-            <h3 v-if="hasTrakt"><a :href="traktLink" :target="linkTarget">Trakt.tv</a></h3>
+            <h3>
+              <a
+                :href="homepage"
+                :target="linkTarget"
+              >
+                Homepage
+              </a>
+            </h3>
+            <h3 v-if="hasImdb">
+              <a
+                :href="imdbLink"
+                :target="linkTarget"
+              >
+                IMDb
+              </a>
+            </h3>
+            <h3 v-if="hasTmdb">
+              <a
+                :href="tmdbLink"
+                :target="linkTarget"
+              >
+                TMDb
+              </a>
+            </h3>
+            <h3 v-if="hasTrakt">
+              <a
+                :href="traktLink"
+                :target="linkTarget"
+              >
+                Trakt.tv
+              </a>
+            </h3>
           </div>
         </div>
-        <div v-if="poster" class="poster modal-body-content">
-          <a :href="homepage" :target="linkTarget">
-            <img v-if="poster" :src="poster"/>
+        <div
+          v-if="poster"
+          class="poster modal-body-content"
+        >
+          <a
+            :href="homepage"
+            :target="linkTarget"
+          >
+            <img
+              v-if="poster"
+              :src="poster"
+            >
           </a>
         </div>
-        <div v-if="this.nextEpisode" class="next-episode modal-body-content">
+        <div
+          v-if="nextEpisode"
+          class="next-episode modal-body-content"
+        >
           <h2>Next Episode - {{ nextEpisodeTitle }}</h2>
-          <Countdown v-if="this.date" :date="this.date"></Countdown>
-          <p v-text="this.nextEpisodeDescription"></p>
+          <Countdown
+            v-if="date"
+            :date="date"
+          />
+          <p v-text="nextEpisodeDescription" />
         </div>
-        <div v-else class="no-next-episode modal-body-content">
-          <h3 v-if="returning">next episode to be announced</h3>
-          <h3 v-else>no future episodes - {{ status }}</h3>
+        <div
+          v-else
+          class="no-next-episode modal-body-content"
+        >
+          <h3 v-if="returning">
+            next episode to be announced
+          </h3>
+          <h3 v-else>
+            no future episodes - {{ status }}
+          </h3>
         </div>
       </section>
       <footer class="modal-card-foot">
-        <a class="button is-success" @click="$emit('close')">close</a>
+        <a
+          class="button is-success"
+          @click="$emit('close')"
+        >
+          close
+        </a>
       </footer>
     </div>
   </div>
@@ -49,12 +123,17 @@
 
   export default {
     name: 'ShowModal',
-    props: ['slug'],
-    data () {
-      return {}
-    },
     components: {
       Countdown
+    },
+    props: {
+      slug: {
+        type: String,
+        required: true
+      }
+    },
+    data () {
+      return {}
     },
     computed: {
       loggedIn () { return this.$store.getters.loggedIn },
@@ -147,10 +226,12 @@
     .show-info {
       display: flex;
       flex-flow: wrap;
+
       p {
         flex: 1 0 95%;
         margin-top: 0;
       }
+
       .links {
         display: flex;
         justify-content: space-around;
@@ -216,8 +297,10 @@
     padding: 0 20px;
     display: flex;
     flex-flow: wrap;
+
     h2 a {
       color: #4a4a4a;
+
       &:hover {
         text-decoration: underline;
       }
@@ -261,6 +344,7 @@
 
     a {
       color: #4a4a4a;
+
       &:hover {
         text-decoration: underline;
       }
@@ -315,15 +399,18 @@
     padding-right: 0.75em;
     text-align: center;
     white-space: nowrap;
+
     &:hover {
       border-color: #b5b5b5;
       color: #363636;
     }
+
     &:active {
       border-color: #4a4a4a;
       -webkit-box-shadow: inset 0 1px 2px rgba(10, 10, 10, 0.2);
       color: #363636;
     }
+
     &:focus {
       border-color: #00d1b2;
       color: #363636;

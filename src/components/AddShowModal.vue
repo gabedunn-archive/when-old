@@ -1,26 +1,57 @@
 <template>
   <div class="modal">
-    <div class="modal-background" @click="$emit('close')"></div>
+    <div
+      class="modal-background"
+      @click="$emit('close')"
+    />
     <div class="modal-card">
       <header class="modal-card-head">
-        <p class="modal-card-title" v-text="title"></p>
-        <i class="material-icons close" @click="$emit('close')">close</i>
+        <p
+          class="modal-card-title"
+          v-text="title"
+        />
+        <i
+          class="material-icons close"
+          @click="$emit('close')"
+        >
+          close
+        </i>
       </header>
       <section class="modal-card-body">
         <div class="show-info modal-body-content">
           <div class="input-container">
-            <label for="slug-input">show slug:</label>
-            <input id="slug-input" class="has-padding-md" type="text" v-model="slug"/>
-            <a class="button" @click="addShow(slug)">Add Show</a>
+            <label for="slug-input">
+              show slug:
+            </label>
+            <input
+              id="slug-input"
+              v-model="slug"
+              class="has-padding-md"
+              type="text"
+            >
+            <a
+              class="button"
+              @click="addShow(slug)"
+            >
+              Add Show
+            </a>
           </div>
           <br v-if="notFound">
-          <div v-if="notFound" class="notification">
+          <div
+            v-if="notFound"
+            class="notification"
+          >
             <h2>show not found.</h2>
           </div>
         </div>
       </section>
       <footer class="modal-card-foot">
-        <a class="button is-success" @click="$emit('close')">close</a>
+        <a
+          class="button is-success"
+          @click="$emit('close')"
+        >
+          close
+        </a>
       </footer>
     </div>
   </div>

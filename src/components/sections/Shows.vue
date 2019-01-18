@@ -1,6 +1,10 @@
 <template>
   <div class="shows">
-    <show v-for="slug in slugs" :slug="slug" :key="slug"></show>
+    <show
+      v-for="slug in slugs"
+      :key="slug"
+      :slug="slug"
+    />
     <message
       v-if="!loggedIn"
       title="sign in for your own list."
@@ -8,7 +12,10 @@
       :link="loginURL"
       :order="$store.getters.shiftedOrder(3)"
     />
-    <add-show v-if="loggedIn" :order="$store.getters.shiftedOrder(4)"/>
+    <add-show
+      v-if="loggedIn"
+      :order="$store.getters.shiftedOrder(4)"
+    />
   </div>
 </template>
 
@@ -28,13 +35,15 @@
 
   export default {
     name: 'Shows',
+    components: {
+      Show,
+      Message,
+      AddShow
+    },
     data () {
       return {
         loginURL: getOAuthURL()
       }
-    },
-    async mounted () {
-      await this.init()
     },
     computed: {
       slugs () {
@@ -47,10 +56,16 @@
         return this.$store.getters.loggedIn
       }
     },
-    components: {
-      Show,
-      Message,
-      AddShow
+    watch: {
+      async token () {
+        if (!this.token) {
+          this.$store.dispatch('unsetSlugs')
+        }
+        await this.init()
+      }
+    },
+    async mounted () {
+      await this.init()
     },
     methods: {
       async init () {
@@ -105,14 +120,6 @@
             this.$store.dispatch('changeSlugs', ['game-of-thrones', 'shameless-2011'])
           }
         }
-      }
-    },
-    watch: {
-      async token () {
-        if (!this.token) {
-          this.$store.dispatch('unsetSlugs')
-        }
-        await this.init()
       }
     }
   }

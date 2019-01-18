@@ -1,10 +1,10 @@
 <template>
   <section id="main">
     <div class="wrapper">
-      <PageHeader/>
-      <Shows/>
+      <PageHeader />
+      <Shows />
     </div>
-    <PageFooter/>
+    <PageFooter />
   </section>
 </template>
 

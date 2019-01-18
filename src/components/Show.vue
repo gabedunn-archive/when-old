@@ -1,18 +1,39 @@
 <template>
-  <div class="show" :style="`order: ${this.order};`">
+  <div
+    class="show"
+    :style="`order: ${order};`"
+  >
     <div @click="showModal">
       <div class="poster">
-        <img v-if="poster" :src="poster"/>
-        <img v-else src="../assets/img/trakt-icon-red.svg"/>
+        <img
+          v-if="poster"
+          :src="poster"
+        >
+        <img
+          v-else
+          src="../assets/img/trakt-icon-red.svg"
+        >
       </div>
       <div class="details">
         <h2>{{ title }}</h2>
-        <Countdown v-if="date" :date="date" @zeroed="zeroed"></Countdown>
-        <h3 v-else-if="status !== 'returning series'">{{ status }}.</h3>
-        <h3 v-else>next to be announced.</h3>
+        <Countdown
+          v-if="date"
+          :date="date"
+          @zeroed="zeroed"
+        />
+        <h3 v-else-if="status !== 'returning series'">
+          {{ status }}.
+        </h3>
+        <h3 v-else>
+          next to be announced.
+        </h3>
       </div>
     </div>
-    <show-modal v-if="modal" :slug="slug" @close="hideModal"/>
+    <show-modal
+      v-if="modal"
+      :slug="slug"
+      @close="hideModal"
+    />
   </div>
 </template>
 
@@ -25,6 +46,10 @@
 
   export default {
     name: 'Show',
+    components: {
+      Countdown,
+      ShowModal
+    },
     props: {
       slug: {
         type: String,
@@ -35,9 +60,6 @@
       return {
         modal: false
       }
-    },
-    async mounted () {
-      await this.init()
     },
     computed: {
       title () { return this.$store.getters.showTitle(this.slug) },
@@ -53,9 +75,8 @@
             : this.status === 'canceled' ? this.shiftedOrder(1) : this.shiftedOrder(2)
       }
     },
-    components: {
-      Countdown,
-      ShowModal
+    async mounted () {
+      await this.init()
     },
     methods: {
       async init () {
@@ -81,7 +102,7 @@
             data.nextEpisode = await getNextEpisodeInfo(this.slug)
           } catch (e) { /* do nothing */ }
         } catch (e) { /* do nothing */ }
-        this.$store.dispatch('setShowData', {slug: this.slug, data})
+        this.$store.dispatch('setShowData', { slug: this.slug, data })
       },
       async zeroed () {
         await this.init()

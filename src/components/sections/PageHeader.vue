@@ -1,7 +1,7 @@
 <template>
   <div class="header">
     <div class="container">
-      <h1 v-text="title"></h1>
+      <h1 v-text="title" />
     </div>
   </div>
 </template>

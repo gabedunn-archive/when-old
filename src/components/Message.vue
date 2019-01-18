@@ -1,20 +1,36 @@
 <template>
-  <div class="show message" :style="`order: ${this.orderStyle};`">
+  <div
+    class="show message"
+    :style="`order: ${orderStyle};`"
+  >
     <div>
       <div class="poster">
-        <a :href="link" :target="targetText">
+        <a
+          :href="link"
+          :target="targetText"
+        >
           <img src="../assets/img/trakt-icon-red.svg">
         </a>
       </div>
       <div class="details">
         <h2>
-          <a v-if="isLink" :href="link" :target="targetText">
+          <a
+            v-if="isLink"
+            :href="link"
+            :target="targetText"
+          >
             {{ title }}
           </a>
-          <template v-else>{{ title }}</template>
+          <template v-else>
+            {{ title }}
+          </template>
         </h2>
         <h3>
-          <a v-if="isLink" :href="link" :target="targetText">
+          <a
+            v-if="isLink"
+            :href="link"
+            :target="targetText"
+          >
             {{ message }}
           </a>
           <template v-else>
