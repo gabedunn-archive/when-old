@@ -13,7 +13,6 @@
     "test:unit": "vue-cli-service test:unit"
   },
   "dependencies": {
-    "babel-register": "^6.26.0",
     "bulma": "^0.7.2",
     "dotenv": "^6.2.0",
     "koa": "^2.6.2",
