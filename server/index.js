@@ -3,9 +3,13 @@ const Router = require('koa-router')
 const koaJson = require('koa-json')
 const bodyParser = require('koa-bodyparser')
 // const koaStatic = require('koa-static')
+const { config } = require('dotenv')
+const { resolve } = require('path')
 
 const { exchangeToken, revokeToken } = require('./auth')
 const { cors, responseTime, home } = require('./funcs')
+
+config({ path: resolve(process.cwd(), '.env.local') })
 
 const app = new Koa()
 const r = new Router()
@@ -23,7 +27,6 @@ r.all('/revoke', revokeToken)
 app.use(r.routes())
 
 const port = process.env.PORT || 8000
-// const port = process.env.PORT || 8080
 
 app.listen(port)
 console.log(`Listening on port ${port}...`)
