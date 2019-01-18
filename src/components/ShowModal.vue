@@ -202,7 +202,6 @@
     right: 0;
     top: 0;
     opacity: $opacity;
-    filter: alpha($opacity);
     background-color: rgba(10, 10, 10, 1);
   }
 
