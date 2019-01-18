@@ -4,8 +4,8 @@ const koaJson = require('koa-json')
 const bodyParser = require('koa-bodyparser')
 // const koaStatic = require('koa-static')
 
-const {exchangeToken, revokeToken} = require('./auth')
-const {cors, responseTime, home} = require('./funcs')
+const { exchangeToken, revokeToken } = require('./auth')
+const { cors, responseTime, home } = require('./funcs')
 
 const app = new Koa()
 const r = new Router()

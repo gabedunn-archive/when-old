@@ -1,8 +1,8 @@
-const {config} = require('dotenv')
-const {resolve} = require('path')
+const { config } = require('dotenv')
+const { resolve } = require('path')
 const r2 = require('r2')
 
-config({path: resolve(process.cwd(), '.env.local')})
+config({ path: resolve(process.cwd(), '.env.local') })
 
 const exchangeToken = async (ctx) => {
   if (ctx.request.method === 'POST') {
@@ -25,7 +25,7 @@ const exchangeToken = async (ctx) => {
     }
     try {
       const request = await r2.post('https://api.trakt.tv/oauth/token',
-        {headers, json: reqBody})
+        { headers, json: reqBody })
       ctx.body = await request.json
       ctx.status = 200
     } catch (e) {
@@ -64,7 +64,7 @@ const revokeToken = async (ctx) => {
     const requestBody = `token=${body.token}`
     try {
       const request = await r2.post('https://api.trakt.tv/oauth/revoke',
-        {headers, body: requestBody})
+        { headers, body: requestBody })
       ctx.body = await request.json
       ctx.status = 200
     } catch (e) {
@@ -82,7 +82,6 @@ const revokeToken = async (ctx) => {
       'Origin, X-Requested-With, Content-Type, Accept')
     ctx.set('Access-Control-Allow-Methods', 'POST, GET, PUT, DELETE, OPTIONS')
   }
-
 }
 
 module.exports = {
