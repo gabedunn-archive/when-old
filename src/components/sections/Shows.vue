@@ -77,8 +77,7 @@
               const whenListIsPresent = checkForWhenList(userLists)
               if (whenListIsPresent) {
                 try {
-                  const whenListItems = (await getWhenListItems(this.$store.state.token)).map(
-                    item => item.show.ids.slug)
+                  const whenListItems = (await getWhenListItems(this.$store.state.token)).map(item => item.show.ids.slug)
                   if (whenListItems.length === 0) {
                     this.useDefaultList()
                   } else {

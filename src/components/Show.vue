@@ -105,7 +105,22 @@
         this.$store.dispatch('setShowData', { slug: this.slug, data })
       },
       async zeroed () {
-        await this.init()
+        await this.reset()
+      },
+      async reset () {
+        const data = this.$store.state.showData[this.slug]
+        try {
+          data.show = await getShow(this.slug)
+        } catch (e) {
+          console.error('Failed to get show data:', e)
+        }
+        try {
+          data.date = await getNextEpisode(this.slug)
+          try {
+            data.nextEpisode = await getNextEpisodeInfo(this.slug)
+          } catch (e) { /* do nothing */ }
+        } catch (e) { /* do nothing */ }
+        this.$store.dispatch('setShowData', { slug: this.slug, data })
       },
       showModal () { this.modal = true },
       hideModal () { this.modal = false }
@@ -170,6 +185,7 @@
         font-weight: 300;
         margin: 0.5rem 0;
       }
+
       h3 {
         font-weight: 300;
         margin-bottom: 0;
