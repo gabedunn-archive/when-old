@@ -20,9 +20,13 @@
     computed: {
       calculateDate () {
         const dif = new Date(Date.parse(this.date) - this.currentDate)
-        const days = Math.floor(dif / (1000 * 60 * 60 * 24))
-        const hours = Math.floor((dif / (1000 * 60 * 60)) % 24)
-        return `${days}d ${hours}h ${dif.getMinutes()}m ${dif.getSeconds()}s`
+        const sign = dif > 0 ? '' : '-'
+        const diff = dif > 0 ? dif : new Date(-dif)
+        const days = Math.floor(diff / (1000 * 60 * 60 * 24))
+        const hours = Math.floor((diff / (1000 * 60 * 60)) % 24)
+        const mins = diff.getMinutes()
+        const secs = diff.getSeconds()
+        return `${sign}${days}d ${hours}h ${mins}m ${secs}s`
       }
     },
     mounted () {
