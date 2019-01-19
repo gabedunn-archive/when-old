@@ -8,10 +8,12 @@
         <img
           v-if="poster"
           :src="poster"
+          alt="poster image"
         >
         <img
           v-else
           src="../assets/img/trakt-icon-red.svg"
+          alt="trakt icon"
         >
       </div>
       <div class="details">
