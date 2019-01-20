@@ -4,9 +4,13 @@
       <h1 v-text="title" />
       <button
         v-if="updateExists"
+        class="button is-info update-button"
         @click="refreshApp"
       >
-        New version available! Click to update
+        Update available
+        <span class="icon-parent">
+          <fa icon="sync-alt" />
+        </span>
       </button>
     </div>
   </div>
@@ -50,6 +54,9 @@
 </script>
 
 <style scoped lang="scss">
+  @import "~bulma/sass/utilities/_all";
+  @import "~bulma/sass/elements/button";
+
   // header styles
   $grey: rgb(54, 54, 54);
   .wrapper .header {
@@ -66,5 +73,14 @@
 
       margin: 0;
     }
+  }
+
+  // update button styles
+  .update-button {
+    margin-top: 2rem;
+  }
+
+  .icon-parent {
+    padding-left: 0.3rem;
   }
 </style>

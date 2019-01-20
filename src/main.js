@@ -4,6 +4,7 @@ import router from './router'
 import store from './store'
 import 'whatwg-fetch'
 import './registerServiceWorker'
+import './fontAwesome'
 
 Vue.config.devtools = true
 Vue.config.productionTip = false
