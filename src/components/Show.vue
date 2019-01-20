@@ -104,7 +104,9 @@
             data.nextEpisode = await getNextEpisodeInfo(this.slug)
           } catch (e) { /* do nothing */ }
         } catch (e) { /* do nothing */ }
-        this.$store.dispatch('setShowData', { slug: this.slug, data })
+        if (Object.entries(data).length !== 0) {
+          this.$store.dispatch('setShowData', { slug: this.slug, data })
+        }
       },
       async zeroed () {
         await this.reset()
