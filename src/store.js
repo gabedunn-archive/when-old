@@ -1,10 +1,11 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import VuexPersist from 'vuex-persist'
+import localForage from 'localforage'
 
 const vuexPersist = new VuexPersist({
-  key: 'when',
-  storage: localStorage
+  key: 'when-vuex',
+  storage: localForage
 })
 
 Vue.use(Vuex)
