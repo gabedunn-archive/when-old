@@ -5,8 +5,7 @@ import Main from './views/Main.vue'
 Vue.use(Router)
 
 export default new Router({
-  // TODO: uncomment for history mode.
-  // mode: 'history',
+  mode: 'history',
   routes: [
     {
       path: '/',
