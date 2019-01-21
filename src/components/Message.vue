@@ -9,6 +9,7 @@
           :href="link"
           :target="targetText"
           :rel="targetRel"
+          aria-label="OAuth Link"
         >
           <img
             src="../assets/img/trakt-icon-red.svg"

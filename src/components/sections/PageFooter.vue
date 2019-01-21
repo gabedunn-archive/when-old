@@ -18,6 +18,7 @@
             :key="i"
           >
             <a
+              :aria-label="item.type"
               :href="item.href"
               target="_blank"
               rel="noopener"
