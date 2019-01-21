@@ -1,6 +1,7 @@
 {
-  "name": "when",
-  "short_name": "when",
+  "name": "when.",
+  "short_name": "when.",
+  "description": "when. is a website that tells you when TV shows are coming out to the second.",
   "icons": [
     {
       "src": "/img/icons/android-chrome-192x192.png",
@@ -15,6 +16,6 @@
   ],
   "start_url": "/index.html",
   "display": "standalone",
-  "background_color": "#000000",
+  "background_color": "#ffffff",
   "theme_color": "#ffffff"
 }
