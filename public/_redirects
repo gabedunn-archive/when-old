@@ -1,5 +1,6 @@
 # Optional: Redirect default Netlify subdomain to primary domain
-http://when.netlify.com/* https://when.netlify.com/:splat 301!
+http://when.netlify.com/* https://when.redxte.ch/:splat 301!
+https://when.netlify.com/* https://when.redxte.ch/:splat 301!
 
 # History mode for SPA
 /* /index.html 200
