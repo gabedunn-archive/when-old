@@ -12,15 +12,16 @@
           <a
             :href="homepage"
             :target="linkTarget"
+            :rel="linkRel"
             v-text="title"
           />
           <template v-if="loggedIn && !defaultList">
             - <a
-              class="remove"
-              @click="remove"
-            >
-              Remove
-            </a>
+            class="remove"
+            @click="remove"
+          >
+            Remove
+          </a>
           </template>
         </p>
         <i
@@ -38,6 +39,7 @@
               <a
                 :href="homepage"
                 :target="linkTarget"
+                :rel="linkRel"
               >
                 Homepage
               </a>
@@ -46,6 +48,7 @@
               <a
                 :href="imdbLink"
                 :target="linkTarget"
+                :rel="linkRel"
               >
                 IMDb
               </a>
@@ -54,6 +57,7 @@
               <a
                 :href="tmdbLink"
                 :target="linkTarget"
+                :rel="linkRel"
               >
                 TMDb
               </a>
@@ -62,6 +66,7 @@
               <a
                 :href="traktLink"
                 :target="linkTarget"
+                :rel="linkRel"
               >
                 Trakt.tv
               </a>
@@ -75,11 +80,12 @@
           <a
             :href="homepage"
             :target="linkTarget"
+            :rel="linkRel"
           >
             <img
               v-if="poster"
               :src="poster"
-            >
+              alt="poster image">
           </a>
         </div>
         <div
@@ -155,7 +161,8 @@
       hasImdb () { return this.ids ? this.ids.hasOwnProperty('imdb') ? this.ids.imdb : false : false },
       hasTmdb () { return this.ids ? this.ids.hasOwnProperty('tmdb') ? this.ids.tmdb : false : false },
       hasTrakt () { return this.ids ? this.ids.hasOwnProperty('trakt') ? this.ids.trakt : false : false },
-      linkTarget () { return this.homepage ? '_blank' : '' }
+      linkTarget () { return this.homepage ? '_blank' : '' },
+      linkRel () { return this.homepage ? 'noopener' : '' }
     },
     async mounted () {},
     methods: {

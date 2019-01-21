@@ -8,8 +8,12 @@
         <a
           :href="link"
           :target="targetText"
+          :rel="targetRel"
         >
-          <img src="../assets/img/trakt-icon-red.svg">
+          <img
+            src="../assets/img/trakt-icon-red.svg"
+            alt="trakt poster"
+          >
         </a>
       </div>
       <div class="details">
@@ -18,6 +22,7 @@
             v-if="isLink"
             :href="link"
             :target="targetText"
+            :rel="targetRel"
           >
             {{ title }}
           </a>
@@ -29,7 +34,7 @@
           <a
             v-if="isLink"
             :href="link"
-            :target="targetText"
+            :rel="targetRel"
           >
             {{ message }}
           </a>
@@ -78,6 +83,7 @@
     computed: {
       isLink () { return this.link !== '#' },
       targetText () { return this.target ? '_blank' : '' },
+      targetRel () { return this.target ? 'noopener' : '' },
       orderStyle () { return this.order ? this.order : 150000000 }
     }
   }

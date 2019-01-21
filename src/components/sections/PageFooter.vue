@@ -20,6 +20,7 @@
             <a
               :href="item.href"
               target="_blank"
+              rel="noopener"
             >
               <i :class="'socicon-' + item.icon" />
             </a>
