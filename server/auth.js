@@ -2,7 +2,7 @@ const { config } = require('dotenv')
 const { resolve } = require('path')
 const r2 = require('r2')
 
-config({ path: resolve(process.cwd(), '.env.local') })
+config({ path: resolve(process.cwd(), '.env') })
 
 const exchangeToken = async (ctx) => {
   if (ctx.request.method === 'POST') {

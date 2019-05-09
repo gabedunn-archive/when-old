@@ -9,7 +9,7 @@ const { resolve } = require('path')
 const { exchangeToken, revokeToken } = require('./auth')
 const { cors, responseTime, home } = require('./funcs')
 
-config({ path: resolve(process.cwd(), '.env.local') })
+config({ path: resolve(process.cwd(), '.env') })
 
 const app = new Koa()
 const r = new Router()

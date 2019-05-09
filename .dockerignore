@@ -1,0 +1,5 @@
+.git
+.env
+.editorconfig
+.idea
+.dockerignore
