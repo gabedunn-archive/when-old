@@ -17,11 +17,11 @@
           />
           <template v-if="loggedIn && !defaultList">
             - <a
-            class="remove"
-            @click="remove"
-          >
-            Remove
-          </a>
+              class="remove"
+              @click="remove"
+            >
+              Remove
+            </a>
           </template>
         </p>
         <i
@@ -85,7 +85,8 @@
             <img
               v-if="poster"
               :src="poster"
-              alt="poster image">
+              alt="poster image"
+            >
           </a>
         </div>
         <div
