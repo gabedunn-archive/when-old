@@ -1,0 +1,30 @@
+version: '3.7'
+# TODO: add a reverse proxy for auth with SSL
+# TODO: add SSL to frontend environment
+
+services:
+  auth:
+    build:
+      context: ./
+      dockerfile: ./.docker/auth/Dockerfile
+    env_file:
+      - .env
+    ports:
+      - "8001:8000"
+    volumes:
+      - ./:/app/:rw
+      - /app/node_modules
+  frontend:
+    build:
+      context: ./
+      dockerfile: ./.docker/frontend/Dockerfile
+    dns:
+      - 1.1.1.1
+      - 1.0.0.1
+    env_file:
+      - .env
+    ports:
+      - "8000:80"
+    volumes:
+      - ./:/app/:rw
+      - /app/node_modules
