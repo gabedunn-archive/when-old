@@ -1,4 +1,5 @@
 version: '3.7'
+# TODO: add environment variables for production
 # TODO: add a reverse proxy for auth with SSL
 # TODO: add SSL to frontend environment
 
