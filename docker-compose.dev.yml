@@ -1,0 +1,30 @@
+version: '3.7'
+# TODO: add environment variables for dev & prod
+
+services:
+  auth:
+    build:
+      context: ./
+      dockerfile: ./.docker/auth/Dockerfile
+    command: ["yarn", "start:dev"]
+    env_file:
+      - .env
+    ports:
+      - "8001:8000"
+    volumes:
+      - .:/app:consistent
+      - /app/node_modules
+  development:
+    build:
+      context: ./
+      dockerfile: ./.docker/development/Dockerfile
+    dns:
+      - 1.1.1.1
+      - 1.0.0.1
+    env_file:
+      - .env
+    ports:
+      - "8000:8080"
+    volumes:
+      - .:/app:consistent
+      - /app/node_modules
