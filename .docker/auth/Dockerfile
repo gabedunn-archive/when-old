@@ -11,9 +11,7 @@ COPY ./server/package.json ./server/*.lock ./
 RUN yarn
 
 # copy the server folder
-COPY ./server .
-
-EXPOSE 8000
+COPY ./server ./
 
 # run the server. override in compose file to run start:dev
 CMD ["yarn", "start"]

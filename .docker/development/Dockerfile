@@ -11,7 +11,7 @@ COPY package*.json *.lock ./
 RUN yarn
 
 # copy over the working files
-COPY . .
+COPY ./ ./
 
 # run the serve command
 CMD ["yarn", "serve"]

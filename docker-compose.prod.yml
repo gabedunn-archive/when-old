@@ -9,7 +9,8 @@ services:
       context: ./
       dockerfile: ./.docker/auth/Dockerfile
     env_file:
-      - .env
+      - .env.local
+      - .env.production
     ports:
       - "8001:8000"
     volumes:
@@ -23,7 +24,8 @@ services:
       - 1.1.1.1
       - 1.0.0.1
     env_file:
-      - .env
+      - .env.local
+      - .env.production
     ports:
       - "8000:80"
     volumes:

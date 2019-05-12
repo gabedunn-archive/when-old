@@ -11,7 +11,7 @@ COPY package*.json *.lock ./
 RUN yarn
 
 # copy over the working files
-COPY . .
+COPY ./ ./
 
 # build the app
 RUN yarn build

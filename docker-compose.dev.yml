@@ -8,7 +8,8 @@ services:
       dockerfile: ./.docker/auth/Dockerfile
     command: ["yarn", "start:dev"]
     env_file:
-      - .env
+      - .env.local
+      - .env.development
     ports:
       - "8001:8000"
     volumes:
@@ -22,7 +23,8 @@ services:
       - 1.1.1.1
       - 1.0.0.1
     env_file:
-      - .env
+      - .env.local
+      - .env.development
     ports:
       - "8000:8080"
     volumes:
