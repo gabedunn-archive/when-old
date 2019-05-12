@@ -5,7 +5,7 @@ LABEL maintainer="Gabe Dunn <gabe.dunn@shaw.ca>"
 WORKDIR /app
 
 # copy package.json and yarn.lock to leverage caching
-COPY package.json yarn.lock ./
+COPY package*.json *.lock ./
 
 # install dependencies
 RUN yarn

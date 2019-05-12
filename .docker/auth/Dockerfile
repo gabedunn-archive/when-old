@@ -5,7 +5,7 @@ LABEL maintainer="Gabe Dunn <gabe.dunn@shaw.ca>"
 WORKDIR /app
 
 # copy the package.json file from the server folder to imporove caching
-COPY ./server/package.json ./server/yarn.lock .
+COPY ./server/package.json ./server/*.lock ./
 
 # install the dependencies
 RUN yarn
