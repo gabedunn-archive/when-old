@@ -34,7 +34,7 @@
   },
   "devDependencies": {
     "@babel/plugin-proposal-optional-chaining": "^7.6.0",
-    "@vue/cli-plugin-babel": "^3.11.0",
+    "@vue/cli-plugin-babel": "^4.0.5",
     "@vue/cli-plugin-eslint": "^3.11.0",
     "@vue/cli-plugin-pwa": "^3.11.0",
     "@vue/cli-plugin-unit-jest": "^3.11.0",
