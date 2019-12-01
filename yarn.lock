@@ -3334,10 +3334,10 @@ cyclist@^1.0.1:
   resolved "https://registry.yarnpkg.com/cyclist/-/cyclist-1.0.1.tgz#596e9698fd0c80e12038c2b82d6eb1b35b6224d9"
   integrity sha1-WW6WmP0MgOEgOMK4LW6xs1tiJNk=
 
-dart-sass@^1.23.0:
-  version "1.23.0"
-  resolved "https://registry.yarnpkg.com/dart-sass/-/dart-sass-1.23.0.tgz#73f2de7bcc3353ebb9316bd477ae1d656d801f54"
-  integrity sha512-ll7BF/SStXZs84Ojg859IIDBA6Afi6Kf2IKVmIdrn4nIgLpxy9o3nUwBj9739j4xceSiw7My3r7MnT1iwpxJQQ==
+dart-sass@^1.23.7:
+  version "1.23.7"
+  resolved "https://registry.yarnpkg.com/dart-sass/-/dart-sass-1.23.7.tgz#3dd2d0bab110745349cc629dae4fa2ba86b46772"
+  integrity sha512-egjDzxr4xw3qz5PW3EWVkQhbcmVtzD8IFwOHkDe2hhh8zMcUKzKx1OE0JLrnr14jFId7TuOp0t+ASda1e+PvyQ==
   dependencies:
     chokidar ">=2.0.0 <4.0.0"
 
@@ -7040,12 +7040,7 @@ lodash.uniq@^4.5.0:
   resolved "https://registry.yarnpkg.com/lodash.uniq/-/lodash.uniq-4.5.0.tgz#d0225373aeb652adc1bc82e4945339a842754773"
   integrity sha1-0CJTc662Uq3BvILklFM5qEJ1R3M=
 
-lodash.uniqueid@^4.0.1:
-  version "4.0.1"
-  resolved "https://registry.yarnpkg.com/lodash.uniqueid/-/lodash.uniqueid-4.0.1.tgz#3268f26a7c88e4f4b1758d679271814e31fa5b26"
-  integrity sha1-MmjyanyI5PSxdY1nknGBTjH6WyY=
-
-lodash@4.x, lodash@^4.13.1, lodash@^4.17.10, lodash@^4.17.11, lodash@^4.17.3, lodash@^4.17.4, lodash@^4.17.5, lodash@^4.3.0:
+lodash@^4.17.11, lodash@^4.17.12, lodash@^4.17.13, lodash@^4.17.14, lodash@^4.17.15, lodash@^4.17.3, lodash@^4.17.4, lodash@^4.3.0:
   version "4.17.15"
   resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.15.tgz#b447f6670a0455bbfeedd11392eff330ea097548"
   integrity sha512-8xOcRHvCjnocdS5cpwXQXVzmmh5e5+saE2QGoeQmbKmRS6J3VQppPOIt0MnmE+4xlZoumy0GPG0D0MVIQbNA1A==
