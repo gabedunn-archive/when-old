@@ -24,7 +24,7 @@
     "koa-router": "^7.4.0",
     "koa-static": "^5.0.0",
     "r2": "^2.0.1",
-    "register-service-worker": "^1.6.2",
+    "register-service-worker": "^1.7.1",
     "vue": "^2.6.10",
     "vue-meta": "^2.3.3",
     "vue-router": "^3.1.3",
